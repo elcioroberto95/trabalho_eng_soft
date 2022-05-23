@@ -31,6 +31,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     };
 
     const addBoard = async (board) => {
+        console.log('board', board);
         await boardService.addBoard(board);
         setModalVisible(false);
     };

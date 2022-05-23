@@ -1,7 +1,16 @@
 import { db } from './firebase';
 import { getUser } from './auth';
 
-const userBoards = () => db.ref('users').child(getUser().uid).child('boards');
+const userBoards = () => {
+    console.log('getUser', getUser());
+    console.log('db.ref(users)', db.ref('users'));
+
+    console.log(
+        "db.ref('users').child(getUser().uid).child('boards');",
+        db.ref('users').child(getUser().uid).child('boards')
+    );
+    return db.ref('users').child(getUser().uid).child('boards');
+};
 
 const userBoard = (board) => userBoards().child(board);
 
