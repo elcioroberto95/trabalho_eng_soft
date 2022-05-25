@@ -4,6 +4,7 @@ import Board from 'react-trello';
 import { boardService } from '../application/services';
 import { withAuthorization } from '../auth/auth-hoc';
 import { BoardSkeleton } from '../components/BoardSkeleton';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const BoardPage = withRouter(
     withAuthorization((authUser) => !!authUser)((props) => {
@@ -23,11 +24,9 @@ export const BoardPage = withRouter(
         const fetchBoard = async () => {
             const data = (await boardService.getBoard(boardId())).val();
 
-            console.log('data', data);
             setBoard(prepareBoard(data));
         };
 
-        // Fill empty properties that are important for Board component
         const prepareBoard = (board) => ({
             ...board,
             lanes: (board?.lanes || []).map((lane) => ({

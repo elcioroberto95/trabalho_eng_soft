@@ -1,4 +1,6 @@
 import { StarFilled, StarOutlined } from '@ant-design/icons';
+import { boardService } from '../application/services';
+import DeleteBoardButton from './DeleteBoardButton';
 import PropTypes from 'prop-types';
 
 export const BoardTitle = ({
@@ -7,6 +9,7 @@ export const BoardTitle = ({
     addition,
     handleBoardStarToggling,
     starred,
+    boardKey,
 }) => (
     <div
         role="button"
@@ -18,6 +21,7 @@ export const BoardTitle = ({
         }`}
     >
         <div className={addition ? 'm-auto' : ''}>{title}</div>
+
         {!addition && (
             <div
                 role="button"
@@ -41,6 +45,7 @@ export const BoardTitle = ({
 
 BoardTitle.propTypes = {
     title: PropTypes.string.isRequired,
+    boardKey: PropTypes.string,
     addition: PropTypes.bool,
     handleBoardClick: PropTypes.func,
     handleBoardStarToggling: PropTypes.func,

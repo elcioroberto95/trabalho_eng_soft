@@ -21,7 +21,7 @@ export const Navbar = withRouter(() => {
                 overlay={
                     <Menu>
                         <Menu.Item key="0" onClick={() => signOut()}>
-                            Sign Out
+                            Sair
                         </Menu.Item>
                     </Menu>
                 }

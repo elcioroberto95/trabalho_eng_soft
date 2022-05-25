@@ -24,7 +24,7 @@ export const BoardModal = (props) => {
 
     return (
         <Modal
-            title="Add board"
+            title="Adicionar Quadro"
             width="400px"
             visible={visible}
             onCancel={closeModal}
@@ -33,7 +33,7 @@ export const BoardModal = (props) => {
             <form className={`w-full`} onSubmit={(event) => handleCreateBoard(event)}>
                 <Input
                     className={`mb-3`}
-                    placeholder="Title"
+                    placeholder="Título"
                     onChange={(event) => setBoardTitle(event.target.value)}
                     value={boardTitle}
                 />
@@ -43,7 +43,7 @@ export const BoardModal = (props) => {
                     loading={loading}
                     disabled={isEmptyText(boardTitle)}
                 >
-                    Add
+                    Adicionar
                 </Button>
             </form>
         </Modal>

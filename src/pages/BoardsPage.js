@@ -6,6 +6,7 @@ import { withAuthorization } from '../auth/auth-hoc';
 import { BoardTitle } from '../components/BoardTitle';
 import { BoardModal } from '../components/BoardModal';
 import { BoardsPageSkeleton } from '../components/BoardsPageSkeleton';
+import DeleteBoardButton from '../components/DeleteBoardButton';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boards, setBoards] = useState({});
@@ -63,37 +64,44 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                     </div>
 
                     <div className="grid grid-cols-4 gap-4 mb-6">
-                        {starredBoards.map((board) => (
-                            <BoardTitle
-                                key={board?.key}
-                                title={board.title}
-                                handleBoardClick={() => history.push(`boards/${board?.key}`)}
-                                handleBoardStarToggling={() =>
-                                    starBoard(board?.key, !board.starred)
-                                }
-                                starred={board.starred}
-                            />
-                        ))}
+                        {starredBoards.map((board) => {
+                            return (
+                                <BoardTitle
+                                    key={board?.key}
+                                    title={board.title}
+                                    handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                                    handleBoardStarToggling={() =>
+                                        starBoard(board?.key, !board.starred)
+                                    }
+                                    starred={board.starred}
+                                    boardKey={board?.key}
+                                />
+                            );
+                        })}
                     </div>
                 </>
             )}
 
             <div className="flex mb-3 items-center text-xl">
-                <UserOutlined className={`mr-2`} /> Personal Boards
+                <UserOutlined className={`mr-2`} /> Meus Quadros
             </div>
 
             <div className="grid grid-cols-4 gap-4">
                 {boards.map((board) => (
-                    <BoardTitle
-                        key={board?.key}
-                        title={board.title}
-                        handleBoardClick={() => history.push(`boards/${board?.key}`)}
-                        handleBoardStarToggling={() => starBoard(board?.key, !board.starred)}
-                        starred={board.starred}
-                    />
+                    <div style={{ position: 'relative' }}>
+                        <BoardTitle
+                            key={board?.key}
+                            boardKey={board?.key}
+                            title={board.title}
+                            handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                            handleBoardStarToggling={() => starBoard(board?.key, !board.starred)}
+                            starred={board.starred}
+                        />
+                        <DeleteBoardButton boardKey={board?.key} />
+                    </div>
                 ))}
                 <BoardTitle
-                    title="Add new board"
+                    title="Adicionar novo quadro"
                     addition={true}
                     handleBoardClick={() => setModalVisible(true)}
                 />
